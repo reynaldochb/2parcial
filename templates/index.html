@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de productos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
+</head>
+<body>
+    <!-- Cabecera -->
+    <header>
+        <h1>SEGUNDO PARCIAL</h1>
+        <p>Nombre: Reynaldo Choque Bilbao</p>
+        <p>Carnet: 10907387</p>
+    </header>
+    
+    <h2>Gestión de productos</h2>
+    <a href="{{ url_for('nuevo_producto') }}">Nuevo producto</a>
+    <br><br>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Fecha de vencimiento</th>
+            <th>Categoría</th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for producto in productos %}
+        <tr>
+            <td>{{ producto.id }}</td>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.cantidad }}</td>
+            <td>{{ producto.precio }}</td>
+            <td>{{ producto.fecha_vencimiento }}</td>
+            <td>{{ producto.categoria }}</td>
+            <td><a href="{{ url_for('editar_producto', id=producto.id) }}">Editar</a></td>
+            <td>
+                <form action="{{ url_for('eliminar_producto', id=producto.id) }}" method="POST">
+                    <input type="submit" value="Eliminar">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

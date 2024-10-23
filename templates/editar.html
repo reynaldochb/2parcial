@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
+</head>
+<body>
+    <!-- Cabecera -->
+    <header>
+        <h1>SEGUNDO PARCIAL</h1>
+        <p>Nombre: Reynaldo Choque Bilbao</p>
+        <p>Carnet: 10907387</p>
+    </header>
+    
+    <h2>Editar Producto</h2>
+    <form action="{{ url_for('editar_producto', id=producto.id) }}" method="POST">
+        Nombre: <input type="text" name="nombre" value="{{ producto.nombre }}" required><br>
+        Cantidad: <input type="number" name="cantidad" value="{{ producto.cantidad }}" required><br>
+        Precio: <input type="text" name="precio" value="{{ producto.precio }}" required><br>
+        Fecha de vencimiento: <input type="date" name="fecha_vencimiento" value="{{ producto.fecha_vencimiento }}" required><br>
+        Categoría: 
+        <select name="categoria" required>
+            <option value="Bebidas" {% if producto.categoria == 'Bebidas' %}selected{% endif %}>Bebidas</option>
+            <option value="Snacks" {% if producto.categoria == 'Snacks' %}selected{% endif %}>Snacks</option>
+            <option value="Lácteos" {% if producto.categoria == 'Lácteos' %}selected{% endif %}>Lácteos</option>
+        </select><br><br>
+        <input type="submit" value="Actualizar">
+    </form>
+</body>
+</html>
